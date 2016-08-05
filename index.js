@@ -12,7 +12,7 @@ module.exports = postcss.plugin('postcss-exclude-classes', (opts) => {
         // Transform CSS AST here
         css.walkRules((rule) => {
             opts.blacklist.forEach((item) => {
-                if (rule.selector.indexOf(item) !== -1) {
+                if (rule.selector.search(item) !== -1) {
                     rule.remove();
                 }
             });

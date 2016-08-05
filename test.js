@@ -13,19 +13,19 @@ function run(t, input, output, opts = { }) {
 
 test('ensure the class is removed', t => {
     return run(t, '.remove-me { }', '', {
-        blacklist: ['.remove-me']
+        blacklist: ['\.remove-me']
     });
 });
 
 test('ensure the nested class is removed', t => {
     return run(t, '.parent .remove-me { }', '', {
-        blacklist: ['.remove-me']
+        blacklist: ['\.remove-me']
     });
 });
 
 test('ensure the class is not removed', t => {
     return run(t, '.dont-remove-me { }', '.dont-remove-me { }', {
-        blacklist: ['.remove-me']
+        blacklist: ['\.removze-me']
     });
 });
 
