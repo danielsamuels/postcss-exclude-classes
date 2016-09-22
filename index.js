@@ -17,5 +17,13 @@ module.exports = postcss.plugin('postcss-exclude-classes', (opts) => {
                 }
             });
         });
+
+        css.walkAtRules((rule) => {
+            opts.blacklist.forEach((item) => {
+                if (item.startsWith('@') && item.substr(1) === rule.name) {
+                    rule.remove();
+                }
+            });
+        });
     };
 });
