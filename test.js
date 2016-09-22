@@ -32,3 +32,15 @@ test('ensure the class is not removed', t => {
 test('ensure the class is not removed without blacklist', t => {
     return run(t, '.dont-remove-me { }', '.dont-remove-me { }', {});
 });
+
+test('ensure at-rules are removed without blacklist', t => {
+    return run(t, '@at-root { @viewport { width: device-width } }', '', {
+        blacklist: ['@at-root']
+    });
+});
+
+test('ensure at-rules are not removed without blacklist', t => {
+    return run(t, '@media screen { }', '@media screen { }', {
+        blacklist: ['@at-root']
+    });
+});
