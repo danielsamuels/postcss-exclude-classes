@@ -59,6 +59,45 @@ test('[regex] ensure the class is not removed', t => {
     });
 });
 
+test('[combined] ensure both classes are removed', t => {
+    return run(t, '.aaaaa { }, .bbbbb { }', '', {
+        blacklist: ['.aaaaa'],
+        regexBlacklist: ['\.b{5}']
+    });
+});
+
+test('[combined] ensure both classes are removed', t => {
+    return run(t, '.aaaaa { }, .bbbbb { }', '', {
+        blacklist: [],
+        regexBlacklist: ['\.[a-z]+']
+    });
+});
+
+test('[combined] ensure all classes are removed', t => {
+    return run(
+        t,
+        '.test-class {}, .test-class2 {}, .test-class3 {},' +
+        '.example-class1 {}, .example-class2 {}, .example-class3 {}', '',
+        {
+            blacklist: ['.test-class'],
+            regexBlacklist: ['\.example-class']
+        }
+    );
+});
+
+test('[combined] ensure all classes are removed', t => {
+    return run(
+        t,
+        '.test-class {}, .test-class2 {}, .test-class3 {},' +
+        ' .example-class1 {}, .example-class2 {}, .example-class3 {}',
+        '',
+        {
+            blacklist: ['.test-class'],
+            regexBlacklist: ['\.example-']
+        }
+    );
+});
+
 test('ensure the class is not removed without blacklist', t => {
     return run(t, '.dont-remove-me { }', '.dont-remove-me { }', {});
 });
