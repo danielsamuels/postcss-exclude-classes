@@ -26,7 +26,8 @@
 
 ```js
 postcss([ require('postcss-exclude-classes')({
-  blacklist: ['\.foo']
+  blacklist: ['.foo'],
+  regexBlacklist: ['\.foo']
 }) ])
 ```
 

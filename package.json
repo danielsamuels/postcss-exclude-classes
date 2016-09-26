@@ -1,6 +1,6 @@
 {
   "name": "postcss-exclude-classes",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "PostCSS plugin to exclude named classes",
   "keywords": [
     "postcss",

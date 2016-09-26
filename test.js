@@ -11,36 +11,54 @@ function run(t, input, output, opts = { }) {
         });
 }
 
-test('ensure the class is removed', t => {
+test('[regular] ensure the class is removed', t => {
     return run(t, '.remove-me { }', '', {
-        blacklist: ['\.remove-me']
+        blacklist: ['.remove-me']
     });
 });
 
-test('ensure the nested class is removed', t => {
+test('[regular] ensure the nested class is removed', t => {
     return run(t, '.parent .remove-me { }', '', {
-        blacklist: ['\.remove-me']
+        blacklist: ['.remove-me']
     });
 });
 
-test('ensure the class is not removed', t => {
+test('[regular] ensure the class is not removed', t => {
     return run(t, '.dont-remove-me { }', '.dont-remove-me { }', {
-        blacklist: ['\.removze-me']
+        blacklist: ['.removze-me']
     });
 });
 
-test('ensure the class is not removed without blacklist', t => {
-    return run(t, '.dont-remove-me { }', '.dont-remove-me { }', {});
-});
-
-test('ensure at-rules are removed without blacklist', t => {
+test('[regular] ensure at-rules are removed without blacklist', t => {
     return run(t, '@at-root { @viewport { width: device-width } }', '', {
         blacklist: ['@at-root']
     });
 });
 
-test('ensure at-rules are not removed without blacklist', t => {
+test('[regular] ensure at-rules are not removed without blacklist', t => {
     return run(t, '@media screen { }', '@media screen { }', {
         blacklist: ['@at-root']
     });
+});
+
+test('[regex] ensure the class is removed', t => {
+    return run(t, '.remove-me { }', '', {
+        regexBlacklist: ['\.remove-me']
+    });
+});
+
+test('[regex] ensure the nested class is removed', t => {
+    return run(t, '.parent .remove-me { }', '', {
+        regexBlacklist: ['\.remove-me']
+    });
+});
+
+test('[regex] ensure the class is not removed', t => {
+    return run(t, '.dont-remove-me { }', '.dont-remove-me { }', {
+        regexBlacklist: ['\.removze-me']
+    });
+});
+
+test('ensure the class is not removed without blacklist', t => {
+    return run(t, '.dont-remove-me { }', '.dont-remove-me { }', {});
 });
