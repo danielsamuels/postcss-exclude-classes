@@ -101,3 +101,9 @@ test('[combined] ensure all classes are removed', t => {
 test('ensure the class is not removed without blacklist', t => {
     return run(t, '.dont-remove-me { }', '.dont-remove-me { }', {});
 });
+
+test('ensure the whole declaration is not removed when class appear only one in a comma separated declaration', t => {
+    return run(t, '.remove-me,.dont-remove-me { }', '.dont-remove-me { }', {
+        blacklist: ['.remove-me']
+    });
+});
