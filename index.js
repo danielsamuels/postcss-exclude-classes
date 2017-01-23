@@ -16,7 +16,7 @@ module.exports = postcss.plugin('postcss-exclude-classes', (opts) => {
                     if (rule.selector.indexOf(item) !== -1) {
                         let selectorToKeep = [];
                         rule.selector.split(',').forEach((subItem) => {
-                            if (subItem.indexOf && subItem.indexOf(item) === -1) {
+                            if (subItem.indexOf(item) === -1) {
                                 selectorToKeep.push(subItem);
                             }
                         });
