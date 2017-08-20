@@ -14,7 +14,18 @@ module.exports = postcss.plugin('postcss-exclude-classes', (opts) => {
             css.walkRules((rule) => {
                 opts.blacklist.forEach((item) => {
                     if (rule.selector.indexOf(item) !== -1) {
-                        rule.remove();
+                        let selectorToKeep = [];
+                        rule.selector.split(',').forEach((subItem) => {
+                            if (subItem.indexOf(item) === -1) {
+                                selectorToKeep.push(subItem);
+                            }
+                        });
+                        // Do not exclude whole declaration when class appear only one in a comma separated declaration
+                        if (selectorToKeep.length) {
+                            rule.selector = selectorToKeep.join(',');
+                        } else {
+                            rule.remove();
+                        }
                     }
                 });
             });
